@@ -50,12 +50,12 @@ class MemberServiceTest extends UnitTestSupport {
         void _willSuccess(){
             // given
             Member createdMember = Member.createNewMember("email@test.com", "password");
-            SignUpServiceRequest serviceRequest = new SignUpServiceRequest("email@test.com", "password");
+            LoginServiceRequest serviceRequest = new LoginServiceRequest(createdMember.getEmail(), createdMember.getPassword());
 
-            given(memberRepository.save(any(Member.class))).willReturn(createdMember);
+            given(memberRepository.findByEmail(anyString())).willReturn(Optional.of(createdMember));
 
             // when
-            MemberResponse result = memberService.signUp(serviceRequest);
+            MemberResponse result = memberService.login(serviceRequest);
 
             // then
             Assertions.assertThat(result)

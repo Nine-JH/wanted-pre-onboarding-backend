@@ -34,7 +34,7 @@ public class MemberService implements LoginUseCase, SignUpUseCase {
         Member member = memberRepository.findByEmail(request.email())
             .orElseThrow(() -> new IllegalArgumentException("로그인 정보가 정확하지 않습니다."));
 
-        if (isPasswordMatch(request.password(), member.getPassword())) {
+        if (!isPasswordMatch(request.password(), member.getPassword())) {
             throw new IllegalArgumentException("로그인 정보가 정확하지 않습니다.");
         }
         return MemberResponse.toDto(member);
