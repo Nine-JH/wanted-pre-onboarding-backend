@@ -1,4 +1,4 @@
-package me.jh9.wantedpreonboarding.common.jwt.unitTest.application;
+package me.jh9.wantedpreonboarding.unit.jwt.application;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
@@ -12,8 +12,6 @@ import me.jh9.wantedpreonboarding.common.jwt.application.request.RefreshAccessTo
 import me.jh9.wantedpreonboarding.common.jwt.domain.JwtEntity;
 import me.jh9.wantedpreonboarding.common.jwt.infra.exception.JwtDeniedException;
 import me.jh9.wantedpreonboarding.common.jwt.infra.exception.JwtExpiredException;
-import me.jh9.wantedpreonboarding.security.jwt.exception.JwtDeniedAuthException;
-import me.jh9.wantedpreonboarding.security.jwt.exception.JwtExpiredAuthException;
 import me.jh9.wantedpreonboarding.utils.JwtTestSupport;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;

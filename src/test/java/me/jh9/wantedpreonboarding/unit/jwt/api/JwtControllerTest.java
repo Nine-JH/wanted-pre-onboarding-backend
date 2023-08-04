@@ -1,17 +1,17 @@
-package me.jh9.wantedpreonboarding.common.jwt.unitTest.api;
+package me.jh9.wantedpreonboarding.unit.jwt.api;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import me.jh9.wantedpreonboarding.common.jwt.api.request.RefreshAccessTokenRequest;
-import me.jh9.wantedpreonboarding.utils.ControllerTestSupport;
+import me.jh9.wantedpreonboarding.utils.ControllerUnitTestSupport;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
 
-class JwtControllerTest extends ControllerTestSupport {
+class JwtControllerTest extends ControllerUnitTestSupport {
 
     @DisplayName("refreshAccessToken(RefreshAccessTokenRequest request)은")
     @Nested

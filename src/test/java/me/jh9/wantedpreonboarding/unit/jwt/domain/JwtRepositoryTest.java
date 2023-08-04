@@ -1,4 +1,4 @@
-package me.jh9.wantedpreonboarding.common.jwt.unitTest.domain;
+package me.jh9.wantedpreonboarding.unit.jwt.domain;
 
 import static java.lang.Thread.sleep;
 

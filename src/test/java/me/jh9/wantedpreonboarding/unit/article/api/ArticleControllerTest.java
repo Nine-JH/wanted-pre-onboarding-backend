@@ -1,4 +1,4 @@
-package me.jh9.wantedpreonboarding.article.unit.api;
+package me.jh9.wantedpreonboarding.unit.article.api;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -6,13 +6,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import me.jh9.wantedpreonboarding.article.api.request.ArticleCreateRequest;
-import me.jh9.wantedpreonboarding.utils.ControllerTestSupport;
+import me.jh9.wantedpreonboarding.utils.ControllerUnitTestSupport;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
 
-class ArticleControllerTest extends ControllerTestSupport {
+class ArticleControllerTest extends ControllerUnitTestSupport {
 
     @DisplayName("createArticle() 은")
     @Nested

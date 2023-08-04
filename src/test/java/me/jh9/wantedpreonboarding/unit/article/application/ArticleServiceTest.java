@@ -1,33 +1,19 @@
-package me.jh9.wantedpreonboarding.article.unit.application;
+package me.jh9.wantedpreonboarding.unit.article.application;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.BDDMockito.given;
 
-import me.jh9.wantedpreonboarding.article.application.ArticleService;
 import me.jh9.wantedpreonboarding.article.application.request.ArticleCreateServiceRequest;
 import me.jh9.wantedpreonboarding.article.application.response.ArticleResponse;
 import me.jh9.wantedpreonboarding.article.domain.Article;
-import me.jh9.wantedpreonboarding.article.repository.ArticleRepository;
-import me.jh9.wantedpreonboarding.member.infra.MemberRepository;
-import me.jh9.wantedpreonboarding.utils.MockedUnitTestSupport;
+import me.jh9.wantedpreonboarding.utils.UnitTestSupport;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 
-class ArticleServiceTest extends MockedUnitTestSupport {
-
-    @InjectMocks
-    private ArticleService articleService;
-
-    @Mock
-    private ArticleRepository articleRepository;
-
-    @Mock
-    private MemberRepository memberRepository;
+class ArticleServiceTest extends UnitTestSupport {
 
     @DisplayName("createArticle() 은")
     @Nested

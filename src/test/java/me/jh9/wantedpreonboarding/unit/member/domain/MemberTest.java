@@ -1,4 +1,4 @@
-package me.jh9.wantedpreonboarding.member.unit.domain;
+package me.jh9.wantedpreonboarding.unit.member.domain;
 
 import static org.junit.jupiter.api.Assertions.*;
 

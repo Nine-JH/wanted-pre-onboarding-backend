@@ -1,30 +1,22 @@
-package me.jh9.wantedpreonboarding.member.unit.application;
+package me.jh9.wantedpreonboarding.unit.member.application;
 
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.BDDMockito.given;
 
-import me.jh9.wantedpreonboarding.member.application.MemberService;
+import java.util.Optional;
 import me.jh9.wantedpreonboarding.member.application.request.LoginServiceRequest;
 import me.jh9.wantedpreonboarding.member.application.request.SignUpServiceRequest;
 import me.jh9.wantedpreonboarding.member.application.response.MemberResponse;
 import me.jh9.wantedpreonboarding.member.domain.Member;
-import me.jh9.wantedpreonboarding.member.infra.MemberRepository;
-import me.jh9.wantedpreonboarding.utils.MockedUnitTestSupport;
+import me.jh9.wantedpreonboarding.utils.UnitTestSupport;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 
-class MemberServiceTest extends MockedUnitTestSupport {
-
-    @InjectMocks
-    MemberService memberService;
-
-    @Mock
-    MemberRepository memberRepository;
+class MemberServiceTest extends UnitTestSupport {
 
     @DisplayName("signUp(String email, String password)는 ")
     @Nested
@@ -58,12 +50,12 @@ class MemberServiceTest extends MockedUnitTestSupport {
         void _willSuccess(){
             // given
             Member createdMember = Member.createNewMember("email@test.com", "password");
-            SignUpServiceRequest serviceRequest = new SignUpServiceRequest("email@test.com", "password");
+            LoginServiceRequest serviceRequest = new LoginServiceRequest(createdMember.getEmail(), createdMember.getPassword());
 
-            given(memberRepository.save(any(Member.class))).willReturn(createdMember);
+            given(memberRepository.findByEmail(anyString())).willReturn(Optional.of(createdMember));
 
             // when
-            MemberResponse result = memberService.signUp(serviceRequest);
+            MemberResponse result = memberService.login(serviceRequest);
 
             // then
             Assertions.assertThat(result)

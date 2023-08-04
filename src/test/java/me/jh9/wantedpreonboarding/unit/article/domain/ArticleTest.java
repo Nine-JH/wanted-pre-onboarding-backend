@@ -1,4 +1,4 @@
-package me.jh9.wantedpreonboarding.article.unit.domain;
+package me.jh9.wantedpreonboarding.unit.article.domain;
 
 import me.jh9.wantedpreonboarding.article.domain.Article;
 import org.junit.jupiter.api.DisplayName;
