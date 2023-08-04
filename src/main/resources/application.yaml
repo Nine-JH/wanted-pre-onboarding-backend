@@ -20,7 +20,7 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: validate
+      ddl-auto: create
     show-sql: true
     properties:
       hibernate:
@@ -43,9 +43,15 @@ spring:
     activate:
       on-profile: test
 
+#  datasource:
+#    driver-class-name: org.testcontainers.jdbc.ContainerDatabaseDriver
+#    url: jdbc:tc:mysql:8:///
+
   datasource:
-    driver-class-name: org.testcontainers.jdbc.ContainerDatabaseDriver
-    url: jdbc:tc:mysql:8:///
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:~/fc_tddStudy
+    username: sa
+    password:
 
   jpa:
     hibernate:
