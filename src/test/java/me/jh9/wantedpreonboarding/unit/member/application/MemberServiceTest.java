@@ -1,4 +1,4 @@
-package me.jh9.wantedpreonboarding.member.unit.application;
+package me.jh9.wantedpreonboarding.unit.member.application;
 
 
 import static org.mockito.ArgumentMatchers.any;

@@ -1,4 +1,4 @@
-package me.jh9.wantedpreonboarding.common.jwt.unitTest.api;
+package me.jh9.wantedpreonboarding.unit.jwt.api;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;

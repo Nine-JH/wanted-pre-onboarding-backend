@@ -1,4 +1,4 @@
-package me.jh9.wantedpreonboarding.article.unit.application;
+package me.jh9.wantedpreonboarding.unit.article.application;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;

@@ -1,4 +1,4 @@
-package me.jh9.wantedpreonboarding.common.jwt.unitTest.application;
+package me.jh9.wantedpreonboarding.unit.jwt.application;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;

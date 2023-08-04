@@ -1,4 +1,4 @@
-package me.jh9.wantedpreonboarding.member.unit.infra;
+package me.jh9.wantedpreonboarding.unit.member.infra;
 
 import java.util.NoSuchElementException;
 import java.util.Optional;

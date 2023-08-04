@@ -1,4 +1,4 @@
-package me.jh9.wantedpreonboarding.article.unit.api;
+package me.jh9.wantedpreonboarding.unit.article.api;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
