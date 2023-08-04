@@ -31,6 +31,12 @@ spring:
     console:
       enabled: true
 
+jwt:
+  secret-key: ABCDEFGHIJKLMNOP
+  expired-time:
+    access: 3600
+    refresh: 18000
+
 ---
 spring:
   config:
@@ -52,3 +58,9 @@ spring:
   sql:
     init:
       mode: never
+
+jwt:
+  secret-key: ABCDEFGHIJKLMNOP
+  expired-time:
+    access: 3600
+    refresh: 18000
