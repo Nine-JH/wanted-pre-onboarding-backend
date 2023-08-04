@@ -36,6 +36,9 @@ dependencies {
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
+    // h2
+    runtimeOnly 'com.h2database:h2'
+
     // testContainers
     testImplementation group: 'org.testcontainers', name: 'junit-jupiter', version: '1.18.3'
     testImplementation group: 'org.testcontainers', name: 'mysql', version: '1.18.3'
