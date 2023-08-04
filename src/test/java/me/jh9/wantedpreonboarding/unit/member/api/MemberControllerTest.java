@@ -4,36 +4,14 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import jakarta.validation.Valid;
-import me.jh9.wantedpreonboarding.member.api.request.LoginRequest;
 import me.jh9.wantedpreonboarding.member.api.request.SignUpRequest;
-import me.jh9.wantedpreonboarding.member.application.response.MemberResponse;
-import me.jh9.wantedpreonboarding.utils.ControllerTestSupport;
+import me.jh9.wantedpreonboarding.utils.ControllerUnitTestSupport;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
-class MemberControllerTest extends ControllerTestSupport {
-
-    @PostMapping("/signUp")
-    public ResponseEntity<MemberResponse> signUp(@RequestBody @Valid SignUpRequest request) {
-
-        return ResponseEntity.status(HttpStatus.CREATED)
-            .contentType(MediaType.APPLICATION_JSON)
-            .body(memberService.signUp(request.toServiceRequest()));
-    }
-
-    @PostMapping("/login")
-    public ResponseEntity<MemberResponse> login(@RequestBody@Valid LoginRequest request) {
-        return ResponseEntity.status(HttpStatus.CREATED)
-            .contentType(MediaType.APPLICATION_JSON)
-            .body(memberService.login(request.toServiceRequest()));
-    }
+class MemberControllerTest extends ControllerUnitTestSupport {
 
     @DisplayName("signUp() 은")
     @Nested

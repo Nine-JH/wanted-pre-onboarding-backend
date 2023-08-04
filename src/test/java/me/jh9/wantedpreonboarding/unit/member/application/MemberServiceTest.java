@@ -2,29 +2,21 @@ package me.jh9.wantedpreonboarding.unit.member.application;
 
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.BDDMockito.given;
 
-import me.jh9.wantedpreonboarding.member.application.MemberService;
+import java.util.Optional;
 import me.jh9.wantedpreonboarding.member.application.request.LoginServiceRequest;
 import me.jh9.wantedpreonboarding.member.application.request.SignUpServiceRequest;
 import me.jh9.wantedpreonboarding.member.application.response.MemberResponse;
 import me.jh9.wantedpreonboarding.member.domain.Member;
-import me.jh9.wantedpreonboarding.member.infra.MemberRepository;
-import me.jh9.wantedpreonboarding.utils.MockedUnitTestSupport;
+import me.jh9.wantedpreonboarding.utils.UnitTestSupport;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 
-class MemberServiceTest extends MockedUnitTestSupport {
-
-    @InjectMocks
-    MemberService memberService;
-
-    @Mock
-    MemberRepository memberRepository;
+class MemberServiceTest extends UnitTestSupport {
 
     @DisplayName("signUp(String email, String password)는 ")
     @Nested
