@@ -38,10 +38,12 @@ dependencies {
 
     // h2
     runtimeOnly 'com.h2database:h2'
+    testRuntimeOnly 'com.h2database:h2'
 
     // testContainers
     testImplementation group: 'org.testcontainers', name: 'junit-jupiter', version: '1.18.3'
     testImplementation group: 'org.testcontainers', name: 'mysql', version: '1.18.3'
+    testImplementation group: 'com.redis.testcontainers', name: 'testcontainers-redis', version: '1.6.4'
 }
 
 tasks.named('test') {
