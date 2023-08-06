@@ -1,7 +1,5 @@
 package me.jh9.wantedpreonboarding.unit.member.domain;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import me.jh9.wantedpreonboarding.member.domain.Member;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;

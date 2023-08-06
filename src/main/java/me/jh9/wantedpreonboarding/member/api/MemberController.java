@@ -3,6 +3,8 @@ package me.jh9.wantedpreonboarding.member.api;
 import jakarta.validation.Valid;
 import me.jh9.wantedpreonboarding.member.api.request.LoginRequest;
 import me.jh9.wantedpreonboarding.member.api.request.SignUpRequest;
+import me.jh9.wantedpreonboarding.member.application.response.LoginResponse;
+import me.jh9.wantedpreonboarding.member.application.request.LoginServiceRequest;
 import me.jh9.wantedpreonboarding.member.application.response.MemberResponse;
 import me.jh9.wantedpreonboarding.member.application.usecase.LoginUseCase;
 import me.jh9.wantedpreonboarding.member.application.usecase.SignUpUseCase;
@@ -35,9 +37,10 @@ public class MemberController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<MemberResponse> login(@RequestBody@Valid LoginRequest request) {
+    public ResponseEntity<LoginResponse> login(@RequestBody @Valid LoginRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED)
             .contentType(MediaType.APPLICATION_JSON)
-            .body(loginUseCase.login(request.toServiceRequest()));
+            .body(loginUseCase
+                .login(new LoginServiceRequest(request.email(), request.password())));
     }
 }

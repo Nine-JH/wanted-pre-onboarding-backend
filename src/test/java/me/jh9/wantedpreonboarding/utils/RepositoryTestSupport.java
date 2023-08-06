@@ -1,9 +1,8 @@
 package me.jh9.wantedpreonboarding.utils;
 
-import me.jh9.wantedpreonboarding.article.repository.ArticleRepository;
+import me.jh9.wantedpreonboarding.article.infra.ArticleRepository;
 import me.jh9.wantedpreonboarding.common.jwt.infra.RedisJwtRepository;
 import me.jh9.wantedpreonboarding.member.infra.MemberRepository;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;

@@ -23,4 +23,10 @@ public class MemberControllerAdvice {
             .body(new ErrorResponse(
                 exception.getMessage()));
     }
+
+    @ExceptionHandler
+    public ResponseEntity<ErrorResponse> runtimeException(RuntimeException exception) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+            .body(new ErrorResponse(exception.getMessage()));
+    }
 }

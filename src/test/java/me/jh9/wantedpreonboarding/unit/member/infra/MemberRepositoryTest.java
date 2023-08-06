@@ -6,7 +6,6 @@ import me.jh9.wantedpreonboarding.member.domain.Member;
 import me.jh9.wantedpreonboarding.member.infra.MemberRepository;
 import me.jh9.wantedpreonboarding.utils.IntegrationTestSupport;
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
