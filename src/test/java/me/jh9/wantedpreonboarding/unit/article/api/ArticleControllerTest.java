@@ -22,7 +22,7 @@ class ArticleControllerTest extends ControllerUnitTestSupport {
         @Test
         void _willSuccess() throws Exception {
             // given
-            ArticleCreateRequest request = new ArticleCreateRequest(1L, "title",
+            ArticleCreateRequest request = new ArticleCreateRequest("title",
                 "this is test content");
 
             // when then
@@ -40,7 +40,7 @@ class ArticleControllerTest extends ControllerUnitTestSupport {
             @Test
             void isNull_willFail() throws Exception {
                 // given
-                ArticleCreateRequest request = new ArticleCreateRequest(1L, null,
+                ArticleCreateRequest request = new ArticleCreateRequest(null,
                     "this is test content");
 
                 // when then
@@ -55,7 +55,7 @@ class ArticleControllerTest extends ControllerUnitTestSupport {
             @Test
             void isBlank_willFail() throws Exception {
                 // given
-                ArticleCreateRequest request = new ArticleCreateRequest(1L, "         ",
+                ArticleCreateRequest request = new ArticleCreateRequest("         ",
                     "this is test content");
 
                 // when then
@@ -74,7 +74,7 @@ class ArticleControllerTest extends ControllerUnitTestSupport {
             @Test
             void isNull_willFail() throws Exception {
                 // given
-                ArticleCreateRequest request = new ArticleCreateRequest(1L, "title",
+                ArticleCreateRequest request = new ArticleCreateRequest("title",
                     null);
 
                 // when then
@@ -90,7 +90,7 @@ class ArticleControllerTest extends ControllerUnitTestSupport {
             @Test
             void isBlank_willFail() throws Exception {
                 // given
-                ArticleCreateRequest request = new ArticleCreateRequest(1L, "title",
+                ArticleCreateRequest request = new ArticleCreateRequest("title",
                     "                    ");
 
                 // when then
@@ -106,7 +106,7 @@ class ArticleControllerTest extends ControllerUnitTestSupport {
             @Test
             void lessThan20_willFail() throws Exception {
                 // given
-                ArticleCreateRequest request = new ArticleCreateRequest(1L, "title",
+                ArticleCreateRequest request = new ArticleCreateRequest("title",
                     "content_lessThan_20");
 
                 // when then
