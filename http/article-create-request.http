@@ -1,0 +1,8 @@
+POST http://localhost:8080/api/v1/article
+Content-Type: APPLICATION/JSON
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiZXhwIjoxNjkxMzI2NTQwfQ.SyB4GPHn9SlfPsFurS0gcR71dWeZbwGOUN1eLeCIwqybLDQikg2Jhq4GUtcvScTpix9t2AVS_EdNe_KC9TttvA
+
+{
+  "title": "이거슨 제목이올시다.",
+  "content": "asdasdkhvxkcjvxjlcvcxjklvhcxjklv"
+}
