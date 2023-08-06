@@ -6,9 +6,10 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import java.util.Objects;
+import me.jh9.wantedpreonboarding.common.BaseEntity;
 
 @Entity
-public class Article {
+public class Article extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,6 +17,7 @@ public class Article {
 
     @Column(name = "member_id")
     private Long memberId;
+
     private String title;
     private String content;
 
@@ -30,6 +32,16 @@ public class Article {
 
     public static Article create(Long memberId, String title, String content) {
         return new Article(null, memberId, title, content);
+    }
+
+    public void update(String title, String content) {
+        if (title != null && !title.isBlank()) {
+            this.title = title;
+        }
+
+        if (content != null && !content.isBlank()) {
+            this.content = content;
+        }
     }
 
     public Long getId() {
