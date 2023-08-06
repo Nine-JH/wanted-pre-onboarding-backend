@@ -1,9 +1,9 @@
 package me.jh9.wantedpreonboarding.member.application.usecase;
 
 import me.jh9.wantedpreonboarding.member.application.request.LoginServiceRequest;
-import me.jh9.wantedpreonboarding.member.application.response.MemberResponse;
+import me.jh9.wantedpreonboarding.member.application.response.LoginResponse;
 
 public interface LoginUseCase {
 
-    MemberResponse login(LoginServiceRequest request);
+    LoginResponse login(LoginServiceRequest request);
 }
