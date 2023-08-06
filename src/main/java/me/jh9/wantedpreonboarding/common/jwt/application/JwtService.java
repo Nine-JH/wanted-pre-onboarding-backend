@@ -19,7 +19,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class JwtService implements AccessTokenUseCase, RefreshTokenUseCase, VerifyUseCase {
-    
+
     private static final String BEARER_TOKEN_PREFIX = "Bearer ";
 
     private final JwtRepository jwtRepository;
@@ -39,16 +39,16 @@ public class JwtService implements AccessTokenUseCase, RefreshTokenUseCase, Veri
 
     @Override
     public String createAccessToken(String subject, long currentTime) {
-        long expiredTime = Long.parseLong(ACCESS_EXPIRED_TIME);
+        long expiredTime = Long.parseLong(REFRESH_EXPIRED_TIME);
 
-        return createJwt(subject, calcExpiredTime(currentTime, expiredTime));
+        return BEARER_TOKEN_PREFIX + createToken(subject, calcExpiredTime(currentTime, expiredTime));
     }
 
     private long calcExpiredTime(long currentTime, long expiredTime) {
         return currentTime + expiredTime;
     }
 
-    private String createJwt(String subject, long expiredTime) {
+    private String createToken(String subject, long expiredTime) {
         return Jwts.builder()
             .setSubject(subject)
             .setExpiration(new Date(expiredTime))
@@ -60,13 +60,15 @@ public class JwtService implements AccessTokenUseCase, RefreshTokenUseCase, Veri
     public String refreshAccessToken(RefreshAccessTokenServiceRequest serviceRequest) {
         Claims verifyResult = verifyAndGet(serviceRequest.refreshToken());
 
-        return createJwt(verifyResult.getSubject(), serviceRequest.currentTime());
+        return BEARER_TOKEN_PREFIX + createToken(verifyResult.getSubject(),
+            serviceRequest.currentTime());
     }
 
     private Claims verifyAndGet(String refreshToken) {
         Claims verify = verifyToken(refreshToken);
 
-        if (jwtRepository.findByJwtEntity(new JwtEntity(refreshToken, JwtType.REFRESH_TOKEN)).isEmpty()) {
+        if (jwtRepository.findByJwtEntity(new JwtEntity(refreshToken, JwtType.REFRESH_TOKEN))
+            .isEmpty()) {
             throw new JwtExpiredException("Jwt is Expired. Please Re-Login");
         }
 
@@ -77,10 +79,10 @@ public class JwtService implements AccessTokenUseCase, RefreshTokenUseCase, Veri
     public String createRefreshToken(String subject, long currentTime) {
         long expiredTime = Long.parseLong(REFRESH_EXPIRED_TIME);
 
-        String refreshToken = createJwt(subject, calcExpiredTime(currentTime, expiredTime));
+        String refreshToken = createToken(subject, calcExpiredTime(currentTime, expiredTime));
         jwtRepository.save(new JwtEntity(refreshToken, JwtType.REFRESH_TOKEN), expiredTime);
 
-        return refreshToken;
+        return BEARER_TOKEN_PREFIX + refreshToken;
     }
 
     @Override
@@ -100,10 +102,9 @@ public class JwtService implements AccessTokenUseCase, RefreshTokenUseCase, Veri
     }
 
     private static String extractToken(String token) {
-        if (token.startsWith(BEARER_TOKEN_PREFIX)) {
+        if (token.contains(BEARER_TOKEN_PREFIX)) {
             return token.substring(BEARER_TOKEN_PREFIX.length());
-        } else {
-            throw new JwtDeniedException("Token must start with Bearer");
         }
+        return token;
     }
 }

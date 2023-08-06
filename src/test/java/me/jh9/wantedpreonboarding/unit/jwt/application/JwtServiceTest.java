@@ -20,6 +20,8 @@ import org.junit.jupiter.api.Test;
 
 public class JwtServiceTest extends JwtTestSupport {
 
+
+
     @DisplayName("createAccessToken(String subject, long currentTime) 은")
     @Nested
     class Context_CreateAccessToken {
@@ -33,7 +35,7 @@ public class JwtServiceTest extends JwtTestSupport {
             // when
             String result = jwtService.createAccessToken(memberId, System.currentTimeMillis());
             Claims claims = Jwts.parser().setSigningKey(secretKey)
-                .parseClaimsJws(result).getBody();
+                .parseClaimsJws(result.substring(BEARER_TOKEN_PREFIX.length())).getBody();
 
             // then
             Assertions.assertThat(result).isNotNull().isNotBlank();
@@ -54,7 +56,7 @@ public class JwtServiceTest extends JwtTestSupport {
             // when
             String result = jwtService.createAccessToken(memberId, System.currentTimeMillis());
             Claims claims = Jwts.parser().setSigningKey(secretKey)
-                .parseClaimsJws(result).getBody();
+                .parseClaimsJws(result.substring(BEARER_TOKEN_PREFIX.length())).getBody();
 
             // then
             Assertions.assertThat(result).isNotNull().isNotBlank();
@@ -132,8 +134,8 @@ public class JwtServiceTest extends JwtTestSupport {
 
             // when
             String result = jwtService.createRefreshToken(memberId, System.currentTimeMillis());
-            io.jsonwebtoken.Claims claims = Jwts.parser().setSigningKey(secretKey)
-                .parseClaimsJws(result).getBody();
+            Claims claims = Jwts.parser().setSigningKey(secretKey)
+                .parseClaimsJws(result.substring(BEARER_TOKEN_PREFIX.length())).getBody();
 
             // then
             Assertions.assertThat(result).isNotNull().isNotBlank();
@@ -159,20 +161,6 @@ public class JwtServiceTest extends JwtTestSupport {
             // then
             Assertions.assertThat(verifyResult).isNotNull();
             Assertions.assertThat(verifyResult.getSubject()).isEqualTo(memberId);
-        }
-
-        @DisplayName("'Bearer '로 시작하지 않을 시 JwtDeniedException을 던진다.")
-        @Test
-        void notStartWithBearer_willFail() {
-            // given
-            String memberId = "1000";
-            String createdJwt = Jwts.builder()
-                .signWith(SignatureAlgorithm.HS512, secretKey)
-                .setSubject(memberId).compact();
-
-            // when then
-            Assertions.assertThatThrownBy(() -> jwtService.verify(createdJwt))
-                .isInstanceOf(JwtDeniedException.class);
         }
 
         @DisplayName("만료시간이 지났다면 JwtExpiredException을 던진다.")
