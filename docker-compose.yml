@@ -1,0 +1,54 @@
+version: '3'
+services:
+  # MySQL 설정
+  mysql-db:
+    container_name: ${MYSQL_CONTAINER_NAME}
+    image: mysql:8
+    ports:
+      - ${MYSQL_EXPOSE_PORT}:3306
+    environment:
+      MYSQL_DATABASE: ${MYSQL_SCHEMA_NAME}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD}
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - wanted-network
+
+  # Redis 설정
+  redis:
+    container_name: ${REDIS_CONTAINER_NAME}
+    image: redis:7.2-rc2-alpine
+    ports:
+      - ${REDIS_EXPOSE_PORT}:6379
+    volumes:
+      - redis-data:/data
+    networks:
+      - wanted-network
+
+  # Spring Boot Application 설정
+  springboot-app:
+    container_name: wanted_springboot_app
+    build:
+      context: .
+      dockerfile: dockerfile
+    ports:
+      - ${SPRING_EXPOSE_PORT}:8080
+    environment:
+      SPRING_DATASOURCE_URL: ${MYSQL_URL}
+      SPRING_DATASOURCE_USERNAME: ${MYSQL_USERNAME}
+      SPRING_DATASOURCE_PASSWORD: ${MYSQL_PASSWORD}
+      SPRING_DATA_REDIS_HOST: ${REDIS_CONTAINER_NAME}
+      SPRING_DATA_REDIS_PORT: ${REDIS_PORT}
+    depends_on:
+      - mysql-db
+      - redis
+    networks:
+      - wanted-network
+
+volumes:
+  mysql-data:
+  redis-data:
+
+networks:
+  wanted-network:
