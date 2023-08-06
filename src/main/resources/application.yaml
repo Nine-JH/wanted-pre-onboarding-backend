@@ -34,9 +34,8 @@ spring:
 jwt:
   secret-key: ABCDEFGHIJKLMNOP
   expired-time:
-    access: 3600
-    refresh: 18000
-
+    access: 10800000
+    refresh: 1800000
 ---
 spring:
   config:
