@@ -12,6 +12,8 @@ import org.springframework.test.context.ActiveProfiles;
 @ActiveProfiles("test")
 public abstract class JwtTestSupport {
 
+    protected final String BEARER_TOKEN_PREFIX = "Bearer ";
+
     @Value("${jwt.secret-key}")
     protected String secretKey;
 
