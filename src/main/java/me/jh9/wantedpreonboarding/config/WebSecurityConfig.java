@@ -30,6 +30,8 @@ public class WebSecurityConfig {
 
         http.authorizeHttpRequests(request ->
             request.requestMatchers(
+
+                    AntPathRequestMatcher.antMatcher(HttpMethod.GET, "/docs/index.html"),
                     AntPathRequestMatcher.antMatcher(HttpMethod.POST, "/api/v1/member/signUp"),
                     AntPathRequestMatcher.antMatcher(HttpMethod.POST, "/api/v1/member/login"),
                     AntPathRequestMatcher.antMatcher(HttpMethod.GET, "/api/v1/article/**"),
