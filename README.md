@@ -11,6 +11,7 @@
 
 ### makefile command 사용
 ```cmd
+$ make help
 Usage:
   make <target> (default: help)
 
@@ -20,6 +21,10 @@ Targets:
   local         build local level docker containers
   down          remove all container
   help          Show this help.
+
+
+# 실행
+$ make run-local
 ```
 * `makefile`의 명령어를 실행합니다.
 * 일반적인 설정을 하지 않고 실행하려면 `run-local`을 사용하면 됩니다.
