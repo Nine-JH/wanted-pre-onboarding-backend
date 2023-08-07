@@ -35,12 +35,16 @@ jwt:
   secret-key: ABCDEFGHIJKLMNOP
   expired-time:
     access: 10800000
-    refresh: 1080000000
+    refresh: 1800000
 ---
 spring:
   config:
     activate:
       on-profile: test
+
+  datasource:
+    driver-class-name: org.testcontainers.jdbc.ContainerDatabaseDriver
+    url: jdbc:tc:mysql:8:///
 
   jpa:
     hibernate:
