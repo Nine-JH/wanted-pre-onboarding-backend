@@ -83,7 +83,7 @@ class MemberControllerTest extends ControllerUnitTestSupport {
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(objectMapper.writeValueAsString(request)))
                 .andDo(print())
-                .andExpect(status().isCreated());
+                .andExpect(status().isOk());
         }
 
         @DisplayName("email 은")

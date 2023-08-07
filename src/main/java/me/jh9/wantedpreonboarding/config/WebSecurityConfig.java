@@ -32,7 +32,8 @@ public class WebSecurityConfig {
             request.requestMatchers(
                     AntPathRequestMatcher.antMatcher(HttpMethod.POST, "/api/v1/member/signUp"),
                     AntPathRequestMatcher.antMatcher(HttpMethod.POST, "/api/v1/member/login"),
-                    AntPathRequestMatcher.antMatcher(HttpMethod.GET, "/api/v1/article/**")
+                    AntPathRequestMatcher.antMatcher(HttpMethod.GET, "/api/v1/article/**"),
+                    AntPathRequestMatcher.antMatcher(HttpMethod.GET, "/api/v1/auth/token")
                 ).permitAll()
                 .anyRequest().authenticated()
         );

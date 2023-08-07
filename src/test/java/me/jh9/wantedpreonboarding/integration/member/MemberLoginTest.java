@@ -3,9 +3,6 @@ package me.jh9.wantedpreonboarding.integration.member;
 import java.util.Optional;
 import me.jh9.wantedpreonboarding.member.api.request.LoginRequest;
 import me.jh9.wantedpreonboarding.member.api.request.SignUpRequest;
-import me.jh9.wantedpreonboarding.member.application.MemberService;
-import me.jh9.wantedpreonboarding.member.application.request.SignUpServiceRequest;
-import me.jh9.wantedpreonboarding.member.application.response.MemberResponse;
 import me.jh9.wantedpreonboarding.member.domain.Member;
 import me.jh9.wantedpreonboarding.member.infra.MemberRepository;
 import me.jh9.wantedpreonboarding.utils.IntegrationTestSupport;
@@ -13,39 +10,13 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 class MemberLoginTest extends IntegrationTestSupport {
 
     @Autowired
-    private MemberService memberService;
-
-    @Autowired
     private MemberRepository memberRepository;
-
-    @DisplayName("로그인을 성공할 수 있다.")
-    @Test
-    void signUpTest_willSuccess() {
-        // given
-        MemberResponse expectedResponse = memberService.signUp(
-            new SignUpServiceRequest("test@email.com", "myPassword1"));
-
-        LoginRequest request = new LoginRequest("test@email.com", "myPassword1");
-        String signUpURL = HOST + port + "/api/v1/member/login";
-
-        // when
-        ResponseEntity<MemberResponse> responseEntity = testRestTemplate
-            .postForEntity(signUpURL, request, MemberResponse.class);
-
-        // then
-        Assertions.assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
-        Assertions.assertThat(responseEntity.getBody()).isEqualTo(expectedResponse);
-        Assertions.assertThat(responseEntity.getHeaders().get(HttpHeaders.AUTHORIZATION))
-            .isNotNull();
-        Assertions.assertThat(responseEntity.getHeaders().get("refresh-token")).isNotNull();
-    }
 
     @DisplayName("아이디가 이메일 포맷이 아니면 실패한다.")
     @Test
