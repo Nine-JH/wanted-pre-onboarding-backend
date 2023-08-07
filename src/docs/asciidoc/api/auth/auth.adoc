@@ -1,0 +1,10 @@
+[[jwt-refreshAccessToken]]
+=== ACCESS TOKEN 재발급
+
+==== HTTP Request
+include::{snippets}/jwt-refreshAccessToken/http-request.adoc[]
+include::{snippets}/jwt-refreshAccessToken/request-fields.adoc[]
+
+==== HTTP Response
+include::{snippets}/jwt-refreshAccessToken/http-response.adoc[]
+include::{snippets}/jwt-refreshAccessToken/response-fields.adoc[]

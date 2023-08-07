@@ -1,0 +1,23 @@
+ifndef::snippets[]
+:snippets: ../../build/generated-snippets
+endif::[]
+= tdd study REST API 문서
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:
+
+[[User-API]]
+== User API
+
+include::api/member/member.adoc[]
+
+[[Article-API]]
+== Article API
+include::api/article/article.adoc[]
+
+[[TOKEN-API]]
+== TOKEN API
+include::api/auth/auth.adoc[]
