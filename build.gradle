@@ -2,6 +2,8 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '3.1.2'
     id 'io.spring.dependency-management' version '1.1.2'
+    id 'jacoco'
+    id "org.asciidoctor.jvm.convert" version "3.3.2"
 }
 
 group = 'me.jh9'
@@ -13,6 +15,13 @@ java {
 
 repositories {
     mavenCentral()
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+    asciidoctorExt
 }
 
 dependencies {
@@ -44,8 +53,72 @@ dependencies {
     testImplementation group: 'org.testcontainers', name: 'junit-jupiter', version: '1.18.3'
     testImplementation group: 'org.testcontainers', name: 'mysql', version: '1.18.3'
     testImplementation group: 'com.redis.testcontainers', name: 'testcontainers-redis', version: '1.6.4'
+    // RestDocs
+    asciidoctorExt 'org.springframework.restdocs:spring-restdocs-asciidoctor'
+    testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
+}
+
+jacocoTestReport {
+    dependsOn test // tests are required to run before generating the report
+
+    reports {
+        xml.required = false
+        csv.required = false
+        html.outputLocation = layout.buildDirectory.dir('jacocoHtml')
+    }
+
+    finalizedBy 'jacocoTestCoverageVerification'
+
+    jacocoTestCoverageVerification {
+        violationRules {
+            rule {
+                limit {
+                    minimum = 0.5
+                }
+            }
+
+            rule {
+                enabled = false
+                element = 'CLASS'
+                includes = ['org.gradle.*']
+
+                limit {
+                    counter = 'LINE'
+                    value = 'TOTALCOUNT'
+                    maximum = 0.3
+                }
+            }
+        }
+    }
 }
 
 tasks.named('test') {
     useJUnitPlatform()
+}
+
+ext {
+    snippetsDir = file('build/generated-snippets')
+}
+
+test {
+    finalizedBy 'jacocoTestReport'
+    outputs.dir snippetsDir
+}
+
+asciidoctor {
+    inputs.dir snippetsDir
+    configurations 'asciidoctorExt'
+
+    sources { // 특정 파일만 html로 만든다.
+        include("**/index.adoc")
+    }
+    baseDirFollowsSourceFile() // 다른 adoc 파일을 include 할 때 경로를 baseDir로 맞춘다.
+    dependsOn test
+}
+
+bootJar {
+    dependsOn asciidoctor
+    from("${asciidoctor.outputDir}") {
+        into 'static/docs'
+    }
 }
