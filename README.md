@@ -36,7 +36,7 @@ $ make run-local
 이후 프로젝트 코드와 통일성을 이루기 위해 `Spring Rest Docs`로 작성되었습니다.
 * 확인 경로
   1. root context의 `api_문서.html`
-  2. docker-compose up 후 `http://${HOST}:${PORT}/docs/index.html`
+  2. 프로젝트 빌드 후 `http://${HOST}:${PORT}/docs/index.html`
 <br>
 
 ## 설계
