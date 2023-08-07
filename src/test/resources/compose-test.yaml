@@ -1,0 +1,18 @@
+version: '3'
+services:
+  # MySQL 설정
+  test_mysql:
+    image: mysql:8
+    environment:
+      MYSQL_DATABASE: wanted
+      MYSQL_ROOT_PASSWORD: 1234
+    ports:
+      - 3306:3306
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  # Redis 설정
+  test_redis:
+    image: redis:7.2-rc2-alpine
+    ports:
+      - 6379:6379
