@@ -2,6 +2,7 @@ package me.jh9.wantedpreonboarding.utils.fake;
 
 import io.jsonwebtoken.Claims;
 import me.jh9.wantedpreonboarding.common.jwt.application.request.RefreshAccessTokenServiceRequest;
+import me.jh9.wantedpreonboarding.common.jwt.application.response.RefreshResponse;
 import me.jh9.wantedpreonboarding.common.jwt.application.usecase.AccessTokenUseCase;
 import me.jh9.wantedpreonboarding.common.jwt.application.usecase.RefreshTokenUseCase;
 import me.jh9.wantedpreonboarding.common.jwt.application.usecase.VerifyUseCase;
@@ -21,8 +22,8 @@ public class JwtFakeService implements AccessTokenUseCase, RefreshTokenUseCase, 
     }
 
     @Override
-    public String refreshAccessToken(RefreshAccessTokenServiceRequest serviceRequest) {
-        return FAKE_ACCESS_TOKEN;
+    public RefreshResponse refreshAccessToken(RefreshAccessTokenServiceRequest serviceRequest) {
+        return new RefreshResponse(FAKE_ACCESS_TOKEN, FAKE_REFRESH_TOKEN);
     }
 
     @Override

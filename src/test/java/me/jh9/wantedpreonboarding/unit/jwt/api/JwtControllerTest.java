@@ -21,7 +21,7 @@ class JwtControllerTest extends ControllerUnitTestSupport {
         @Test
         void _willSuccess() throws Exception {
             // given
-            RefreshAccessTokenRequest request = new RefreshAccessTokenRequest(
+            RefreshAccessTokenRequest request = new RefreshAccessTokenRequest("Bearer",
                 "Bearer asdasd_=.asda_sd.vjkl==xjv");
 
             // when then
@@ -40,7 +40,7 @@ class JwtControllerTest extends ControllerUnitTestSupport {
             @Test
             void notStartWithOwnPrefix_willFail() throws Exception {
                 // given
-                RefreshAccessTokenRequest request = new RefreshAccessTokenRequest(
+                RefreshAccessTokenRequest request = new RefreshAccessTokenRequest("Bearer",
                     "bad.RefreshToke.n");
 
                 // when then
@@ -55,7 +55,7 @@ class JwtControllerTest extends ControllerUnitTestSupport {
             @Test
             void notContainsTwoPeriod_willFail() throws Exception {
                 // given
-                RefreshAccessTokenRequest request = new RefreshAccessTokenRequest(
+                RefreshAccessTokenRequest request = new RefreshAccessTokenRequest("Bearer",
                     "Bearer badRefreshToken");
 
                 // when then
@@ -70,7 +70,7 @@ class JwtControllerTest extends ControllerUnitTestSupport {
             @Test
             void notBase64EncodedToken_willFail() throws Exception {
                 // given
-                RefreshAccessTokenRequest request = new RefreshAccessTokenRequest(
+                RefreshAccessTokenRequest request = new RefreshAccessTokenRequest("Bearer",
                     "Bearer thisIs.not!@#$.base6()*4");
 
                 // when then

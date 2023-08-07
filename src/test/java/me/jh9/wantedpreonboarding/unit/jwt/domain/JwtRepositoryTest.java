@@ -7,7 +7,7 @@ import java.util.Optional;
 import me.jh9.wantedpreonboarding.common.jwt.domain.JwtEntity;
 import me.jh9.wantedpreonboarding.common.jwt.domain.JwtType;
 import me.jh9.wantedpreonboarding.common.jwt.infra.RedisJwtRepository;
-import me.jh9.wantedpreonboarding.utils.RepositoryTestSupport;
+import me.jh9.wantedpreonboarding.utils.IntegrationTestSupport;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -16,7 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.data.redis.core.RedisTemplate;
 
-class JwtRepositoryTest extends RepositoryTestSupport {
+class JwtRepositoryTest extends IntegrationTestSupport {
 
     private final String REFRESH_TOKEN_PREFIX = "jwt:refresh:";
     private final String BLACKLIST_TOKEN_PREFIX = "jwt:blacklist:";

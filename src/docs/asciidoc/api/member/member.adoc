@@ -1,0 +1,21 @@
+[[member-signUp]]
+=== 회원 가입
+
+==== HTTP Request
+include::{snippets}/member-signUp/http-request.adoc[]
+include::{snippets}/member-signUp/request-fields.adoc[]
+
+==== HTTP Response
+include::{snippets}/member-signUp/http-response.adoc[]
+include::{snippets}/member-signUp/response-fields.adoc[]
+
+[[member-login]]
+=== 로그인
+
+==== HTTP Request
+include::{snippets}/member-login/http-request.adoc[]
+include::{snippets}/member-login/request-fields.adoc[]
+
+==== HTTP Response
+include::{snippets}/member-login/http-response.adoc[]
+include::{snippets}/member-login/response-fields.adoc[]

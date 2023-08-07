@@ -56,6 +56,8 @@ public class MemberService implements SignUpUseCase, LoginUseCase {
         final String email = loginRequest.email();
         final String inputPassword = loginRequest.password();
 
+        System.out.println(memberRepository.findAll());
+
         Member member = memberRepository.findByEmail(email)
             .orElseThrow(() -> new IllegalArgumentException("잘못된 로그인 정보입니다."));
 

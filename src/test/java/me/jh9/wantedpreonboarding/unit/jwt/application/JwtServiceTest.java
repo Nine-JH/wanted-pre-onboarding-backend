@@ -8,19 +8,33 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import java.sql.Date;
 import java.util.Optional;
+import me.jh9.wantedpreonboarding.common.jwt.application.JwtService;
 import me.jh9.wantedpreonboarding.common.jwt.application.request.RefreshAccessTokenServiceRequest;
 import me.jh9.wantedpreonboarding.common.jwt.domain.JwtEntity;
+import me.jh9.wantedpreonboarding.common.jwt.domain.JwtRepository;
 import me.jh9.wantedpreonboarding.common.jwt.infra.exception.JwtDeniedException;
 import me.jh9.wantedpreonboarding.common.jwt.infra.exception.JwtExpiredException;
-import me.jh9.wantedpreonboarding.utils.JwtTestSupport;
+import me.jh9.wantedpreonboarding.utils.IntegrationTestSupport;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.test.mock.mockito.MockBean;
 
-public class JwtServiceTest extends JwtTestSupport {
+public class JwtServiceTest extends IntegrationTestSupport {
 
+    protected final String BEARER_TOKEN_PREFIX = "Bearer ";
 
+    @Value("${jwt.secret-key}")
+    protected String secretKey;
+
+    @Autowired
+    protected JwtService jwtService;
+
+    @MockBean
+    protected JwtRepository jwtRepository;
 
     @DisplayName("createAccessToken(String subject, long currentTime) 은")
     @Nested

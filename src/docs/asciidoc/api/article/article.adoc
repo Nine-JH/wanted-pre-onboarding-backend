@@ -1,0 +1,53 @@
+[[article-create]]
+=== 게시글 쓰기
+
+==== HTTP Request
+include::{snippets}/article-create/http-request.adoc[]
+include::{snippets}/article-create/request-fields.adoc[]
+
+==== HTTP Response
+include::{snippets}/article-create/http-response.adoc[]
+include::{snippets}/article-create/response-fields.adoc[]
+
+
+[[article-update]]
+=== 게시글 수정
+
+==== HTTP Request
+include::{snippets}/article-update/http-request.adoc[]
+include::{snippets}/article-update/request-fields.adoc[]
+
+==== HTTP Response
+include::{snippets}/article-update/http-response.adoc[]
+include::{snippets}/article-update/response-fields.adoc[]
+
+
+[[article-delete]]
+=== 게시글 삭제
+
+==== HTTP Request
+include::{snippets}/article-delete/http-request.adoc[]
+
+==== HTTP Response
+include::{snippets}/article-delete/http-response.adoc[]
+
+
+[[article-list-search]]
+=== 게시글 목록 조회
+
+==== HTTP Request
+include::{snippets}/article-list-search/http-request.adoc[]
+
+==== HTTP Response
+include::{snippets}/article-list-search/http-response.adoc[]
+include::{snippets}/article-list-search/response-fields.adoc[]
+
+[[article-search]]
+=== 게시글 상세 조회
+
+==== HTTP Request
+include::{snippets}/article-search/http-request.adoc[]
+
+==== HTTP Response
+include::{snippets}/article-search/http-response.adoc[]
+include::{snippets}/article-search/response-fields.adoc[]

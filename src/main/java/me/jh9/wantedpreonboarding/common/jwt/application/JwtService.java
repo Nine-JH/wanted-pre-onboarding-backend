@@ -6,6 +6,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import java.util.Date;
 import me.jh9.wantedpreonboarding.common.jwt.application.request.RefreshAccessTokenServiceRequest;
+import me.jh9.wantedpreonboarding.common.jwt.application.response.RefreshResponse;
 import me.jh9.wantedpreonboarding.common.jwt.application.usecase.AccessTokenUseCase;
 import me.jh9.wantedpreonboarding.common.jwt.application.usecase.RefreshTokenUseCase;
 import me.jh9.wantedpreonboarding.common.jwt.application.usecase.VerifyUseCase;
@@ -57,11 +58,11 @@ public class JwtService implements AccessTokenUseCase, RefreshTokenUseCase, Veri
     }
 
     @Override
-    public String refreshAccessToken(RefreshAccessTokenServiceRequest serviceRequest) {
+    public RefreshResponse refreshAccessToken(RefreshAccessTokenServiceRequest serviceRequest) {
         Claims verifyResult = verifyAndGet(serviceRequest.refreshToken());
 
-        return BEARER_TOKEN_PREFIX + createToken(verifyResult.getSubject(),
-            serviceRequest.currentTime());
+        return new RefreshResponse(BEARER_TOKEN_PREFIX + createToken(verifyResult.getSubject(),
+            serviceRequest.currentTime()), serviceRequest.refreshToken());
     }
 
     private Claims verifyAndGet(String refreshToken) {
