@@ -60,16 +60,16 @@ public class JwtService implements AccessTokenUseCase, RefreshTokenUseCase, Veri
     @Override
     public RefreshResponse refreshAccessToken(RefreshAccessTokenServiceRequest serviceRequest) {
         Claims verifyResult = verifyAndGet(serviceRequest.refreshToken());
+        long expiredTime = Long.parseLong(ACCESS_EXPIRED_TIME);
 
         return new RefreshResponse(BEARER_TOKEN_PREFIX + createToken(verifyResult.getSubject(),
-            serviceRequest.currentTime()), serviceRequest.refreshToken());
+            calcExpiredTime(serviceRequest.currentTime(), expiredTime)), serviceRequest.refreshToken());
     }
 
     private Claims verifyAndGet(String refreshToken) {
         Claims verify = verifyToken(refreshToken);
 
-        if (jwtRepository.findByJwtEntity(new JwtEntity(refreshToken, JwtType.REFRESH_TOKEN))
-            .isEmpty()) {
+        if (jwtRepository.findByJwtEntity(new JwtEntity(refreshToken, JwtType.REFRESH_TOKEN)).isEmpty()) {
             throw new JwtExpiredException("Jwt is Expired. Please Re-Login");
         }
 
