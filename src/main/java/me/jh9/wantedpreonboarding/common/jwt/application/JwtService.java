@@ -23,7 +23,7 @@ public class JwtService implements AccessTokenUseCase, RefreshTokenUseCase, Veri
 
     private static final String BEARER_TOKEN_PREFIX = "Bearer ";
 
-    private final JwtRepository jwtRepository;
+    private final JwtRepository<JwtEntity> jwtRepository;
 
     @Value("${jwt.secret-key}")
     private String SECRET_KEY;
@@ -34,7 +34,7 @@ public class JwtService implements AccessTokenUseCase, RefreshTokenUseCase, Veri
     @Value("${jwt.expired-time.refresh}")
     private String REFRESH_EXPIRED_TIME;
 
-    public JwtService(JwtRepository jwtRepository) {
+    public JwtService(JwtRepository<JwtEntity> jwtRepository) {
         this.jwtRepository = jwtRepository;
     }
 
@@ -70,7 +70,7 @@ public class JwtService implements AccessTokenUseCase, RefreshTokenUseCase, Veri
 
         if (jwtRepository.findByJwtEntity(new JwtEntity(refreshToken, JwtType.REFRESH_TOKEN))
             .isEmpty()) {
-            throw new JwtExpiredException("Jwt is Expired. Please Re-Login");
+            throw new JwtExpiredException();
         }
 
         return verify;
@@ -95,10 +95,10 @@ public class JwtService implements AccessTokenUseCase, RefreshTokenUseCase, Veri
         try {
             return Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
         } catch (ExpiredJwtException e) {
-            throw new JwtExpiredException("Jwt is Expired. Please Re-Login.");
+            throw new JwtExpiredException();
         } catch (RuntimeException e) {
             e.printStackTrace();
-            throw new JwtDeniedException("It is not signed from our server.");
+            throw new JwtDeniedException();
         }
     }
 

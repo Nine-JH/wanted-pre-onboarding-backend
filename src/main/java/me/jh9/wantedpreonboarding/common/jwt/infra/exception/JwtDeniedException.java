@@ -1,8 +1,17 @@
 package me.jh9.wantedpreonboarding.common.jwt.infra.exception;
 
-public class JwtDeniedException extends RuntimeException {
+import me.jh9.wantedpreonboarding.common.error.exception.ApplicationException;
+import me.jh9.wantedpreonboarding.common.error.exception.ErrorCode;
 
-    public JwtDeniedException(String msg) {
-        super(msg);
+public class JwtDeniedException extends ApplicationException {
+
+    private static final ErrorCode errorCode = ErrorCode.T002;
+
+    public JwtDeniedException() {
+        super(errorCode);
+    }
+
+    public JwtDeniedException(String body) {
+        super(errorCode, body);
     }
 }
