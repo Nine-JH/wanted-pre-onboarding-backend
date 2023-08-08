@@ -7,7 +7,10 @@ import me.jh9.wantedpreonboarding.article.application.request.ArticleUpdateServi
 import me.jh9.wantedpreonboarding.article.application.response.ArticleResponse;
 import me.jh9.wantedpreonboarding.article.domain.Article;
 import me.jh9.wantedpreonboarding.article.infra.ArticleRepository;
+import me.jh9.wantedpreonboarding.article.infra.exception.ArticleNotFoundException;
+import me.jh9.wantedpreonboarding.article.infra.exception.NoAuthArticleException;
 import me.jh9.wantedpreonboarding.member.infra.MemberRepository;
+import me.jh9.wantedpreonboarding.member.infra.exception.MemberNotFoundException;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -44,7 +47,7 @@ public class ArticleService {
     private Article findOrThrowById(Long articleId) {
 
         return articleRepository.findById(articleId)
-            .orElseThrow(() -> new IllegalArgumentException("잘못된 요청, 게시글이 없습니다."));
+            .orElseThrow(ArticleNotFoundException::new);
     }
 
     @Transactional
@@ -79,13 +82,13 @@ public class ArticleService {
 
     private void validateMemberExists(Long memberId) {
         if (!memberRepository.existsById(memberId)) {
-            throw new IllegalArgumentException("잘못된 요청, 회원 정보가 없습니다.");
+            throw new MemberNotFoundException();
         }
     }
 
     private void validateArticleWriter(long memberId, long writerId) {
         if (memberId != writerId) {
-            throw new IllegalArgumentException("권한이 없습니다.");
+            throw new NoAuthArticleException();
         }
     }
 

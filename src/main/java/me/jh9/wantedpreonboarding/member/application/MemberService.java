@@ -11,6 +11,8 @@ import me.jh9.wantedpreonboarding.member.application.usecase.LoginUseCase;
 import me.jh9.wantedpreonboarding.member.application.usecase.SignUpUseCase;
 import me.jh9.wantedpreonboarding.member.domain.Member;
 import me.jh9.wantedpreonboarding.member.infra.MemberRepository;
+import me.jh9.wantedpreonboarding.member.infra.exception.DuplicatedEmailException;
+import me.jh9.wantedpreonboarding.member.infra.exception.LoginErrorException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -47,7 +49,7 @@ public class MemberService implements SignUpUseCase, LoginUseCase {
 
     private void validateEmailExist(SignUpServiceRequest request) {
         if (memberRepository.existsByEmail(request.email())) {
-            throw new IllegalArgumentException("이미 존재하는 이메일 입니다.");
+            throw new DuplicatedEmailException();
         }
     }
 
@@ -56,10 +58,8 @@ public class MemberService implements SignUpUseCase, LoginUseCase {
         final String email = loginRequest.email();
         final String inputPassword = loginRequest.password();
 
-        System.out.println(memberRepository.findAll());
-
         Member member = memberRepository.findByEmail(email)
-            .orElseThrow(() -> new IllegalArgumentException("잘못된 로그인 정보입니다."));
+            .orElseThrow(LoginErrorException::new);
 
         validatePasswordMatch(inputPassword, member.getPassword());
 
@@ -68,7 +68,7 @@ public class MemberService implements SignUpUseCase, LoginUseCase {
 
     private void validatePasswordMatch(String inputPassword, String realPassword) {
         if (!passwordEncoder.matches(inputPassword, realPassword)) {
-            throw new IllegalArgumentException("잘못된 로그인 정보입니다.");
+            throw new LoginErrorException();
         }
     }
 
