@@ -34,8 +34,8 @@ $ make run-local
 ## API 문서
 기본적인 API 설계는 [ISSUE #3](https://github.com/Nine-JH/wanted-pre-onboarding-backend/issues/3)를 참고해 주세요.  
 이후 프로젝트 코드와 통일성을 이루기 위해 `Spring Rest Docs`로 작성되었습니다.
-* 확인 경로
-  1. root context의 `api_문서.html`
+* 확인 방법
+  1. root context의 `api_문서.html` 또는 [위키](https://github.com/Nine-JH/wanted-pre-onboarding-backend/wiki/API-문서)참조
   2. 프로젝트 빌드 후 `http://${HOST}:${PORT}/docs/index.html`
 <br>
 
