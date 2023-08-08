@@ -1,0 +1,8 @@
+### 기존 ACCESS_TOKEN Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiZXhwIjoxNjkxNDY2ODA1fQ.cPaQdADNiZ-ENtOFaK84gtc3XLtb5c2kp5jYxwzyiyt3ZnErUM3ifm1KfdLYGQOIy_-npKLy7HQvSmq51PqIOg"
+POST http://localhost:8080/api/v1/auth/token
+Content-Type: APPLICATION/JSON
+
+{
+  "scope": "Bearer",
+  "refreshToken": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiZXhwIjoxNjkxNDY2ODA1fQ.cPaQdADNiZ-ENtOFaK84gtc3XLtb5c2kp5jYxwzyiyt3ZnErUM3ifm1KfdLYGQOIy_-npKLy7HQvSmq51PqIOg"
+}
