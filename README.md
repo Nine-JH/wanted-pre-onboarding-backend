@@ -27,24 +27,12 @@
 ## 실행
 ### 준비물
 * JDK 17 버전 이상
-* Docker, Docker-compose
+* Docker, Docker-compose 설치가 되어있어야 함.
 <br>
 
 ### makefile command 사용
 ```cmd
-$ make help
-Usage:
-  make <target> (default: help)
-
-Targets:
-  run-local     Generate LOCAL level Backend Infra at ONCE!
-  javaBuild     build the spring boot app
-  local         build local level docker containers
-  down          remove all container
-  help          Show this help.
-
-
-# 실행
+$ pwd # **/wanted-pre-onboarding-backend 이 출력되어야 함.
 $ make run-local
 ```
 * `makefile`의 명령어를 실행합니다.
