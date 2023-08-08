@@ -3,7 +3,28 @@
 <br>
 <br>
 
-## 1. 실행
+## 기능 구현
+
+### 회원가입 & 로그인
+![회원가입.gif](gif%2F%ED%9A%8C%EC%9B%90%EA%B0%80%EC%9E%85.gif)
+
+### 게시글쓰기
+![글쓰기.gif](gif%2F%EA%B8%80%EC%93%B0%EA%B8%B0.gif)
+
+### 게시글 수정
+![게시글 수정.gif](gif%2F%EA%B2%8C%EC%8B%9C%EA%B8%80%20%EC%88%98%EC%A0%95.gif)
+
+### 게시글 삭제
+![게시글 삭제.gif](gif%2F%EA%B2%8C%EC%8B%9C%EA%B8%80%20%EC%82%AD%EC%A0%9C.gif)
+
+### 게시글 조회
+![게시글 조회.gif](gif%2F%EA%B2%8C%EC%8B%9C%EA%B8%80%20%EC%A1%B0%ED%9A%8C.gif)
+
+<br>
+<br>
+
+
+## 실행
 ### 준비물
 * JDK 17 버전 이상
 * Docker, Docker-compose
@@ -54,7 +75,7 @@ $ make run-local
 <br>
 <br>
 
-## 2. 환경설정
+## 환경설정
 ### 1) Docker-Compose 환경설정
 Project Root에 존재하는 `.env`를 통해 실행 설정을 마쳐야합니다.
 
@@ -168,24 +189,24 @@ CREATE DATABASE IF NOT EXISTS wanted;
 <br>
 <br>
      
-# Test
-## 1. Unit, Integeration
+## Test
+### 1) Unit, Integeration
 기본적으로 다음 기준으로 테스트코드 작성을 실시했습니다.
 * Domain, Controller Layer -> Mockist 유닛테스트
 * Repository, Application Layer -> Classicist 유닛 테스트 (거의 Integration으로 간주해도 될 것 같습니다.)  
 <br>
 
-## 2. TestContainers
+### 2) TestContainers
 * 실제와 가까운 테스트를 하고 싶었지만, 이 경우에는 개발자들이 각각 로컬 환경 설정을 해야하는 불편함이 있습니다.  이 때문에 `TestContainers`를 도입해보았습니다.
 
-### TestContainer 설정 경로
+#### TestContainer 설정 경로
 * [test-compose.yaml](https://github.com/Nine-JH/wanted-pre-onboarding-backend/blob/main/src/test/resources/compose-test.yaml)
 * [IntegrationTestSupporter.java](https://github.com/Nine-JH/wanted-pre-onboarding-backend/blob/main/src/test/java/me/jh9/wantedpreonboarding/utils/IntegrationTestSupport.java)
 
-### 단점
+#### 단점
 * 컨테이너를 빌드하기 때문에 테스트 속도가 비교적 느려집니다.
 * 현재는 Class.Instance 마다 컨테이너를 다시 만들기 때문에 **컨테이너 재사용 설정**을 켜 속도를 개선할 수 있습니다.
 <br>
 
-## 3. Jacoco
+### 3) Jacoco
 <img width="1213" alt="image" src="https://github.com/Nine-JH/wanted-pre-onboarding-backend/assets/139187207/608d3369-950a-4bdd-beed-4f32c0471c5e">
