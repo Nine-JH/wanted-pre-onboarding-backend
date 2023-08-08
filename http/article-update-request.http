@@ -1,8 +1,8 @@
-POST http://localhost:8080/api/v1/article
+PUT http://localhost:8080/api/v1/article/1
 Content-Type: APPLICATION/JSON
 Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiZXhwIjoxNjkxNDY2MTg0fQ.oxX4kOtVVBzPSaq5qVMh-rPlMFa6gEiXcol6XvayVtx2nccJMplsoXB27sIi6f3vagfcEQfJxBESN-qqYJZ0Tg
 
 {
-  "title": "이거슨 제목이올시다.",
-  "content": "본문의 내용은 20자리가 넘어야 합니다."
+  "title": "새로운 제목.",
+  "content": "새로운 본문입니다. 이 역시 20자리가 넘어야 합니다."
 }
