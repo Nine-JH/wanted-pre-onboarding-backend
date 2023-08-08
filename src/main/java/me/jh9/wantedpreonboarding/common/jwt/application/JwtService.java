@@ -67,9 +67,10 @@ public class JwtService implements AccessTokenUseCase, RefreshTokenUseCase, Veri
     }
 
     private Claims verifyAndGet(String refreshToken) {
-        Claims verify = verifyToken(refreshToken);
+        String realRefreshToken = extractToken(refreshToken);
+        Claims verify = verifyToken(realRefreshToken);
 
-        if (jwtRepository.findByJwtEntity(new JwtEntity(refreshToken, JwtType.REFRESH_TOKEN))
+        if (jwtRepository.findByJwtEntity(new JwtEntity(realRefreshToken, JwtType.REFRESH_TOKEN))
             .isEmpty()) {
             throw new JwtExpiredException();
         }
