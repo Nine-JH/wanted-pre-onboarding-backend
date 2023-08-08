@@ -41,7 +41,11 @@ public class ArticleService {
 
     public ArticleResponse searchArticle(Long articleId) {
 
-        return ArticleResponse.toResponseDto(findOrThrowById(articleId));
+        Article searchArticle = findOrThrowById(articleId);
+        if (searchArticle.isDeleted()) {
+            throw new ArticleNotFoundException();
+        }
+        return ArticleResponse.toResponseDto(searchArticle);
     }
 
     private Article findOrThrowById(Long articleId) {
@@ -50,10 +54,10 @@ public class ArticleService {
             .orElseThrow(ArticleNotFoundException::new);
     }
 
-    @Transactional
     public List<ArticleResponse> searchArticles(Pageable pageable) {
 
         return articleRepository.findAllArticles(pageable).stream()
+            .filter(article -> !article.isDeleted())
             .map(ArticleResponse::toResponseDto)
             .toList();
     }
