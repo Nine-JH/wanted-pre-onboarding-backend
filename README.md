@@ -59,6 +59,10 @@ $ make run-local
 
 ### JWT는 어떻게?
 * [ISSUE #10](https://github.com/Nine-JH/wanted-pre-onboarding-backend/issues/10)
+
+### Exception Handling
+* [ISSUE #34](https://github.com/Nine-JH/wanted-pre-onboarding-backend/issues/38)
+* [PR #34](https://github.com/Nine-JH/wanted-pre-onboarding-backend/pull/34)
 <br>
 <br>
 <br>
