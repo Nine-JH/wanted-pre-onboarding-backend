@@ -1,17 +1,13 @@
 package me.jh9.wantedpreonboarding.unit.jwt.application;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.BDDMockito.given;
-
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import java.sql.Date;
-import java.util.Optional;
-import me.jh9.wantedpreonboarding.common.jwt.application.JwtService;
 import me.jh9.wantedpreonboarding.common.jwt.application.request.RefreshAccessTokenServiceRequest;
+import me.jh9.wantedpreonboarding.common.jwt.application.response.RefreshResponse;
 import me.jh9.wantedpreonboarding.common.jwt.domain.JwtEntity;
-import me.jh9.wantedpreonboarding.common.jwt.domain.JwtRepository;
+import me.jh9.wantedpreonboarding.common.jwt.domain.JwtType;
 import me.jh9.wantedpreonboarding.common.jwt.infra.exception.JwtDeniedException;
 import me.jh9.wantedpreonboarding.common.jwt.infra.exception.JwtExpiredException;
 import me.jh9.wantedpreonboarding.utils.IntegrationTestSupport;
@@ -19,9 +15,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.test.mock.mockito.MockBean;
 
 public class JwtServiceTest extends IntegrationTestSupport {
 
@@ -29,12 +23,6 @@ public class JwtServiceTest extends IntegrationTestSupport {
 
     @Value("${jwt.secret-key}")
     protected String secretKey;
-
-    @Autowired
-    protected JwtService jwtService;
-
-    @MockBean
-    protected JwtRepository jwtRepository;
 
     @DisplayName("createAccessToken(String subject, long currentTime) 은")
     @Nested
@@ -66,45 +54,35 @@ public class JwtServiceTest extends IntegrationTestSupport {
         void _willSuccess() {
             // given
             String memberId = "1000";
+            String refreshToken = Jwts.builder()
+                .setSubject(memberId)
+                .setExpiration(new Date(System.currentTimeMillis() + 60000000))
+                .signWith(SignatureAlgorithm.HS512, secretKey)
+                .compact();
+
+            jwtRepository.save(new JwtEntity(refreshToken, JwtType.REFRESH_TOKEN), System.currentTimeMillis() + 60000000);
 
             // when
-            String result = jwtService.createAccessToken(memberId, System.currentTimeMillis());
+            RefreshResponse result = jwtService.refreshAccessToken(
+                new RefreshAccessTokenServiceRequest(refreshToken, System.currentTimeMillis()));
             Claims claims = Jwts.parser().setSigningKey(secretKey)
-                .parseClaimsJws(result.substring(BEARER_TOKEN_PREFIX.length())).getBody();
+                .parseClaimsJws(result.accessToken().substring(BEARER_TOKEN_PREFIX.length())).getBody();
 
             // then
-            Assertions.assertThat(result).isNotNull().isNotBlank();
+            Assertions.assertThat(result).isNotNull().isNotNull();
             Assertions.assertThat(claims.getSubject()).isEqualTo(memberId);
         }
 
-        @DisplayName("refreshToken이 존재하지 않으면 실패한다.")
+        @DisplayName("refreshToken이 만료되어 저장소에 없다면 실패한다.")
         @Test
-        void refreshTokenNotExist_willFail() {
-            // given
-            given(jwtRepository.findByJwtEntity(any(JwtEntity.class)))
-                .willReturn(Optional.empty());
-
-            RefreshAccessTokenServiceRequest request = new RefreshAccessTokenServiceRequest(
-                "refreshToken", System.currentTimeMillis());
-
-            // when then
-            Assertions.assertThatThrownBy(() -> jwtService.refreshAccessToken(request))
-                .isInstanceOf(JwtDeniedException.class);
-        }
-
-        @DisplayName("refreshToken 역시 만료되어있다면 실패한다.")
-        @Test
-        void refreshTokenExpiredToo_willFail() {
+        void refreshTokenExpired_willFail() {
             // given
             String memberId = "1000";
             String expiredRefreshToken = Jwts.builder()
                 .setSubject(memberId)
-                .setExpiration(new Date(10))
+                .setExpiration(new Date(1))
                 .signWith(SignatureAlgorithm.HS512, secretKey)
                 .compact();
-
-            given(jwtRepository.findByJwtEntity(any(JwtEntity.class)))
-                .willReturn(Optional.of(expiredRefreshToken));
 
             RefreshAccessTokenServiceRequest request = new RefreshAccessTokenServiceRequest(
                 expiredRefreshToken, System.currentTimeMillis());
